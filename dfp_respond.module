@@ -21,3 +21,20 @@ function dfp_respond_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_form().
+ */
+function dfp_respond_settings_form() {
+  $form = array();
+
+  $form['dfp_respond_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Respond URL'),
+    '#description' => t('The URL for the Respond script.'),
+    '#default_value' => check_plain(variable_get('dfp_respond_url', 'http://responddiscovery.blob.core.windows.net/scripts/respond-discovery-placement.min.js')),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
