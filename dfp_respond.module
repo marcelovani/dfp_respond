@@ -3,3 +3,21 @@
  * @file
  * Main module file for DFP Respond
  */
+
+/**
+ * Implements hook_menu().
+ */
+function dfp_respond_menu() {
+  $items = array();
+  $items['admin/structure/dfp_ads/respond'] = array(
+    'title' => 'DFP Respond',
+    'description' => 'Configure DFP Respond.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dfp_respond_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 15,
+  );
+  return $items;
+}
+
