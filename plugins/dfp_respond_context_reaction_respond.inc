@@ -1,12 +1,13 @@
 <?php
 /**
  * @file
- *   Context condition plugin for DFP Respond.
+ * Context reaction plugin for DFP Respond.
  */
 
 class dfp_respond_context_reaction_respond extends context_reaction {
-  var $dfp_respond_tags = array();
+  public $dfp_respond_tags = array();
 
+  // Form options.
   function options_form($context) {
     $form = array();
     $values = array();
@@ -66,8 +67,9 @@ class dfp_respond_context_reaction_respond extends context_reaction {
     return $form;
   }
 
+  // Execute context.
   function execute() {
-  	$i = 0;
+    $i = 0;
     foreach ($this->get_contexts() as $context_name => $context) {
       if (isset($context->reactions['dfp_respond'])) {
         foreach ($context->reactions['dfp_respond'] as $values) {

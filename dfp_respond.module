@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Main module file for DFP Respond
+ * Main module file for DFP Respond.
  */
 
 /**
@@ -121,7 +121,7 @@ function _dfp_respond_add_js($tags) {
 }
 
 /**
- * Implements of hook_page_build().
+ * Implements hook_page_build().
  */
 function dfp_respond_page_build(&$page) {
 
