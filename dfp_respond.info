@@ -1,0 +1,8 @@
+name = DFP Respond
+description = Respond integration for DFP
+package = Advertising
+core = 7.x
+dependencies[] = context
+dependencies[] = dfp
+configure = admin/structure/dfp_ads/respond
+
