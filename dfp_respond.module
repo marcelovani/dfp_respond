@@ -38,3 +38,33 @@ function dfp_respond_settings_form() {
   return system_settings_form($form);
 }
 
+/**
+ * Implements hook_context_registry().
+ */
+function dfp_respond_context_registry() {
+  return array(
+    'reactions' => array(
+      'dfp_respond' => array(
+        'title' => t('DFP Respond'),
+        'plugin' => 'dfp_respond_context_reaction_respond',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_context_plugins().
+ */
+function dfp_respond_context_plugins() {
+  $plugins = array();
+  $plugins['dfp_respond_context_reaction_respond'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'dfp_respond') . '/plugins',
+      'file' => 'dfp_respond_context_reaction_respond.inc',
+      'class' => 'dfp_respond_context_reaction_respond',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
