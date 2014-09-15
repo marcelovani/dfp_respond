@@ -76,6 +76,51 @@ function _dfp_respond_get_script_url() {
 }
 
 /**
+ * Helper add the javascript code for DFP Respond.
+ */
+function _dfp_respond_add_js($tags) {
+  if (!empty($tags)) {
+    $js  = 'function async(src, callback) {';
+    $js .= '  var s = document.createElement("script");';
+    $js .= '  s.type = "text/javascript";';
+    $js .= '  s.src = src;';
+    $js .= '  s.async = true;';
+    $js .= '  if (!s.addEventListener) {';
+    $js .= '    s.onreadystatechange = function () { if (s.readyState in { loaded: 1, complete: 1 }) { s.onreadystatechange = null; callback(); } }';
+    $js .= '  } else { s.addEventListener("load", function (e) { callback(null, e); }, false); }';
+    $js .= '    var head = document.getElementsByTagName("head")[0];';
+    $js .= '    head.appendChild(s);';
+    $js .= '  }';
+    $js .= '  async("' . _dfp_respond_get_script_url() . '", function () {';
+    $js .= '    var options = {';
+
+    // Process the ad DFP Respond Ad tags.
+    foreach ($tags as $name => $values) {
+      if (!empty($values)) {
+        $js .= PHP_EOL . $name . ': { ';
+        $js .= 'id: "dfp-ad-' . $values['ad_tag'] . '", ';
+        $js .= 'parentContainer: "' . $values['container'] . '", ';
+        $js .= 'parentChildren: "' . $values['children'] . '", ';
+        $js .= 'position: "' . $values['position'] . '", ';
+        $js .= '}, ';
+      }
+    }
+
+    $js .= '    };';
+    $js .= '    Respond.AdBuilder(options, function () {';
+    $js .= '  });';
+    $js .= '});';
+
+    $options = array(
+      'every_page' => TRUE,
+      'scope' => 'header',
+      'type' => 'inline',
+    );
+    drupal_add_js($js, $options);
+  }
+}
+
+/**
  * Implements of hook_page_build().
  */
 function dfp_respond_page_build(&$page) {
