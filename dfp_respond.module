@@ -68,3 +68,10 @@ function dfp_respond_context_plugins() {
   return $plugins;
 }
 
+/**
+ * Helper to process the script url.
+ */
+function _dfp_respond_get_script_url() {
+  return check_plain(variable_get('dfp_respond_url', 'http://responddiscovery.blob.core.windows.net/scripts/respond-discovery-placement.min.js'));
+}
+
