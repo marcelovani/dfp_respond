@@ -152,10 +152,4 @@ function dfp_respond_page_build(&$page) {
 
   // Add the javascript.
   _dfp_respond_add_js($dfp_respond_tags);
-
-  // Add Out Of Page slots on the top of the page.
-  $page['page_top']['dfp_respond'] = array(
-    '#weight' => -1000,
-    '#markup' => '<!-- ' . $html . ' -->',
-  );
 }
