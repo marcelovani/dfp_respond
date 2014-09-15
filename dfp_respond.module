@@ -75,3 +75,42 @@ function _dfp_respond_get_script_url() {
   return check_plain(variable_get('dfp_respond_url', 'http://responddiscovery.blob.core.windows.net/scripts/respond-discovery-placement.min.js'));
 }
 
+/**
+ * Implements of hook_page_build().
+ */
+function dfp_respond_page_build(&$page) {
+
+  $dfp_respond_tags = array();
+  $html = '';
+
+  // Execute dfp_respond plugin.
+  if (module_exists('context')) {
+    if ($plugin = context_get_plugin('reaction', 'dfp_respond')) {
+      $plugin->execute();
+      if (!empty($plugin->dfp_respond_tags)) {
+        foreach ($plugin->dfp_respond_tags as $machinename => $values) {
+          if (!empty($values)) {
+            $dfp_respond_tags[$machinename] = $values;
+
+            // Load the DFP tag.
+            $tag = dfp_tag_load($values['ad_tag']);
+            if (empty($tag->disabled)) {
+              $dfp_tag = dfp_tag($values['ad_tag']);
+              // Render the tag.
+              $html .= render($dfp_tag);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Add the javascript.
+  _dfp_respond_add_js($dfp_respond_tags);
+
+  // Add Out Of Page slots on the top of the page.
+  $page['page_top']['dfp_respond'] = array(
+    '#weight' => -1000,
+    '#markup' => '<!-- ' . $html . ' -->',
+  );
+}
