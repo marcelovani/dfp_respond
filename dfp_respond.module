@@ -31,7 +31,7 @@ function dfp_respond_settings_form() {
     '#type' => 'textfield',
     '#title' => t('Respond URL'),
     '#description' => t('The URL for the Respond script.'),
-    '#default_value' => check_plain(variable_get('dfp_respond_url', 'http://responddiscovery.blob.core.windows.net/scripts/respond-discovery-placement.min.js')),
+    '#default_value' => variable_get('dfp_respond_url', 'http://responddiscovery.blob.core.windows.net/scripts/respond-discovery-placement.min.js'),
     '#required' => TRUE,
   );
 
