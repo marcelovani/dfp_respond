@@ -126,7 +126,6 @@ function _dfp_respond_add_js($tags) {
 function dfp_respond_page_build(&$page) {
 
   $dfp_respond_tags = array();
-  $html = '';
 
   // Execute dfp_respond plugin.
   if (module_exists('context')) {
@@ -142,7 +141,7 @@ function dfp_respond_page_build(&$page) {
             if (empty($tag->disabled)) {
               $dfp_tag = dfp_tag($values['ad_tag']);
               // Render the tag.
-              $html .= render($dfp_tag);
+              render($dfp_tag);
             }
           }
         }
