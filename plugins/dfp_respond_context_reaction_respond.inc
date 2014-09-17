@@ -70,13 +70,14 @@ class dfp_respond_context_reaction_respond extends context_reaction {
   // Execute context.
   function execute() {
     $i = 0;
-    foreach ($this->get_contexts() as $context_name => $context) {
-      if (isset($context->reactions['dfp_respond'])) {
-        foreach ($context->reactions['dfp_respond'] as $values) {
-          if (!empty($values)) {
-            $i++;
-            $this->dfp_respond_tags['placement' . $i] = $values;
-          }
+    foreach ($this->get_contexts() as $context) {
+      if (!isset($context->reactions['dfp_respond'])) {
+        continue;
+      }
+
+      foreach ($context->reactions['dfp_respond'] as $values) {
+        if (!empty($values)) {
+          $this->dfp_respond_tags['placement' . ++$i] = $values;
         }
       }
     }
