@@ -101,7 +101,13 @@ function _dfp_respond_add_js($tags) {
         $js .= 'id: "dfp-ad-' . $values['ad_tag'] . '", ';
         $js .= 'parentContainer: "' . $values['container'] . '", ';
         $js .= 'parentChildren: "' . $values['children'] . '", ';
-        $js .= 'position: "' . $values['position'] . '", ';
+        if ($values['wrapper'] != '') {
+          $js .= 'newContainer: "' . $values['wrapper'] . '", ';
+        };
+        if ($values['wrapper_class'] != '') {
+          $js .= 'newContainerClass: "' . $values['wrapper_class'] . '", ';
+        };
+        $js .= 'position: "' . $values['position'] . '"';
         $js .= '}, ';
       }
     }

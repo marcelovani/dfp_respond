@@ -49,6 +49,20 @@ class dfp_respond_context_reaction_respond extends context_reaction {
       '#size' => 60,
       '#default_value' => isset($values['container']) ? $values['container'] : '',
     );
+    $form['values']['wrapper'] = array(
+      '#title' => t('Respond unit wrapper'),
+      '#description' => t('Enter the tag name for wrapper around the respond unit.'),
+      '#type' => 'textfield',
+      '#size' => 10,
+      '#default_value' => isset($values['wrapper']) ? $values['wrapper'] : '',
+    );
+    $form['values']['wrapper_class'] = array(
+      '#title' => t('Respond unit wrapper class'),
+      '#description' => t('Enter the classes for the wrapper separated by spaces.'),
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#default_value' => isset($values['wrapper_class']) ? $values['wrapper_class'] : '',
+    );
     $form['values']['children'] = array(
       '#title' => t('Children'),
       '#description' => t('(Optional) Enter the type of children that exist in the Container. If paragraphs enter p if they are list items ad li.'),
